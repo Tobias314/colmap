@@ -1,5 +1,6 @@
 #!/bin/bash
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+cd "${SCRIPT_DIR}"
 
 if [[ $* == *--cuda* ]]
 then
@@ -45,8 +46,7 @@ export CIBW_REPAIR_WHEEL_COMMAND="auditwheel repair --exclude libcudart* --exclu
 # Uncomment the following line to not delete the container after the build. Really helpful for debugging purposes!
 #export CIBW_DEBUG_KEEP_CONTAINER=True
 
-cd "${SCRIPT_DIR}"
-
+rm -rf wheelhouse/
 uvx cibuildwheel --platform=linux
 
 if [[ $* == *--upload* ]]
