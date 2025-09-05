@@ -47,7 +47,7 @@ git checkout ${VCPKG_COMMIT_ID}
 
 # Build COLMAP
 cd ${CURRDIR}
-mkdir build && cd build
+mkdir -p build && cd build
 cmake3 .. -GNinja \
     -DCUDA_ENABLED="${BUILD_CUDA_ENABLED}" \
     -DCMAKE_CUDA_ARCHITECTURES="all-major" \
