@@ -643,12 +643,19 @@ void OptionManager::AddMapperOptions() {
                               &mapper->mapper.ba_local_num_images);
   AddAndRegisterDefaultOption("Mapper.ba_local_min_tri_angle",
                               &mapper->mapper.ba_local_min_tri_angle);
+  AddAndRegisterDefaultOption(
+      "Mapper.ba_global_ignore_redundant_points3D",
+      &mapper->mapper.ba_global_ignore_redundant_points3D);
+  AddAndRegisterDefaultOption(
+      "Mapper.ba_global_ignore_redundant_points3D_min_coverage_gain",
+      &mapper->mapper.ba_global_ignore_redundant_points3D_min_coverage_gain);
 
   AddDefaultOption("Mapper.image_list_path", &mapper_image_list_path_);
   AddDefaultOption("Mapper.constant_rig_list_path",
                    &mapper_constant_rig_list_path_);
   AddDefaultOption("Mapper.constant_camera_list_path",
                    &mapper_constant_camera_list_path_);
+  AddDefaultOption("Mapper.max_runtime_seconds", &mapper->max_runtime_seconds);
 
   // IncrementalTriangulator.
   AddAndRegisterDefaultOption("Mapper.tri_max_transitivity",

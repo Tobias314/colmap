@@ -190,6 +190,11 @@ void BindIncrementalPipeline(py::module& m) {
                      "independent of refine_focal_length, "
                      "refine_principal_point, and refine_extra_params.")
       .def_readwrite(
+          "max_runtime_seconds",
+          &Opts::max_runtime_seconds,
+          "Maximum runtime in seconds for the reconstruction process. If set "
+          "to a non-positive value, the process will run until completion.")
+      .def_readwrite(
           "mapper", &Opts::mapper, "Options of the IncrementalMapper.")
       .def_readwrite("triangulation",
                      &Opts::triangulation,
@@ -319,6 +324,23 @@ void BindIncrementalMapperOptions(py::module& m) {
                      &Opts::ba_local_min_tri_angle,
                      "Minimum triangulation for images to be chosen in local "
                      "bundle adjustment.")
+      .def_readwrite(
+          "ba_global_ignore_redundant_points3D",
+          &Opts::ba_global_ignore_redundant_points3D,
+          "Whether to ignore redundant 3D points in bundle adjustment when "
+          "jointly optimizing all parameters. If this is enabled, then the "
+          "bundle adjustment problem is first solved with a reduced set of 3D "
+          "points and then the remaining 3D points are optimized in a second "
+          "step with all other parameters fixed. Points excplicitly configured "
+          "as constant or variable are not ignored. This is only activated "
+          "when the reconstruction has reached sufficient size with at least "
+          "10 registered frames.")
+      .def_readwrite(
+          "ba_global_prune_points_min_coverage_gain",
+          &Opts::ba_global_ignore_redundant_points3D_min_coverage_gain,
+          "The minimum coverage gain for any 3D point to be "
+          "included in the optimization. A larger value means "
+          "more 3D points are ignored.")
       .def_readwrite("min_focal_length_ratio",
                      &Opts::min_focal_length_ratio,
                      "The threshold used to filter and ignore images with "
